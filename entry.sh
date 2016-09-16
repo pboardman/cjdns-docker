@@ -1,4 +1,11 @@
 #!/bin/bash
+
+if ! [ -f /dev/net/tun ]; then
+  mkdir -p /dev/net
+  mknod /dev/net/tun c 10 200
+  chmod 600 /dev/net/tun
+fi
+
 if [ -f /etc/cjdns/cjdroute.conf ]; then
   echo "Starting CJDNS with existing cjdroute.conf"
   #this next command need to output "File descriptor in bad state" for CJDNS to work.
